@@ -26,7 +26,7 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
 add_subdirectory(src-gen)
 endif()
 
-set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR} -comp adas)
+set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
 
 #Generate command
 add_custom_target(
@@ -68,8 +68,8 @@ message (STATUS "make-Compiles generated code.")
 message (STATUS "install copies executables and libraries to build and <CMAKE_INSTALL_PREFIX> dir.")
 message (STATUS "cleanall-Deletes generated directories (i.e gen & src-gen).")
 message (STATUS "clean-Deletes compiled code i.e *.so and *.a files.")
-install(FILES ${CMAKE_BINARY_DIR}/src/adas ${CMAKE_BINARY_DIR}/gen/libadas-dbus.so   ${CMAKE_BINARY_DIR}/src-gen/libadas_adas_types_static_stub.a DESTINATION ${CMAKE_BINARY_DIR})
-install(FILES ${CMAKE_BINARY_DIR}/src/adas ${CMAKE_BINARY_DIR}/gen/libadas-dbus.so   ${CMAKE_BINARY_DIR}/src-gen/libadas_adas_types_static_stub.a DESTINATION ${CMAKE_INSTALL_PREFIX})
+#install(FILES ${CMAKE_BINARY_DIR}/src/adas ${CMAKE_BINARY_DIR}/gen/libadas-dbus.so   ${CMAKE_BINARY_DIR}/src-gen/libadas_adas_types_static_stub.a DESTINATION ${CMAKE_BINARY_DIR})
+#install(FILES ${CMAKE_BINARY_DIR}/src/adas ${CMAKE_BINARY_DIR}/gen/libadas-dbus.so   ${CMAKE_BINARY_DIR}/src-gen/libadas_adas_types_static_stub.a DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 
