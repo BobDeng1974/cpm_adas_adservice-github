@@ -25,6 +25,7 @@ add_subdirectory(src)
 if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
 add_subdirectory(src-gen)
 endif()
+add_subdirectory(src)
 
 set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
 
