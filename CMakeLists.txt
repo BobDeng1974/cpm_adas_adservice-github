@@ -20,8 +20,6 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/gen)
 add_subdirectory(gen)
 endif()
 
-add_subdirectory(src)
-
 if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
 add_subdirectory(src-gen)
 endif()

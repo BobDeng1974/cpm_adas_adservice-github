@@ -3,17 +3,25 @@
 
 #cmake -D CMAKE_SYSROOT=<SYSROOT_PATH> -D src-gen=<SRC-GEN_Build_Path> ..
 
+cmake_minimum_required(VERSION 2.6)
 add_definitions($ENV{CXXFLAGS} $ENV{LDFLAGS})
+
+cmake_policy(SET CMP0015 NEW)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
 
 include_directories(./src)
 
 include_directories(./../src-gen/provides)
 include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)
+include_directories(./consumes)
+include_directories(${CMAKE_SYSROOT}/usr/include)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pthread -std=c++11")
+link_directories(lib)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pthread -std=c++11 -fPIC")
 
 OPTION(USE_INSTALLED_COMMONAPI "Set to OFF to use the local (build tree) version of CommonAPI" ON)
 message(STATUS "USE_INSTALLED_COMMONAPI is set to value: ${USE_INSTALLED_COMMONAPI}")
