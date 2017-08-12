@@ -10,7 +10,7 @@ cmake_policy(SET CMP0015 NEW)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
-
+set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
 include_directories(./src)
 
 include_directories(./../src-gen/provides)
@@ -43,17 +43,17 @@ ${COMMONAPI_LIBDIR}
 LINK_DIRECTORIES(${src-gen})
 add_definitions(-DLINUX_OS)
 
-include_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/libAFoundation/include)
-include_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/libABase/include)
-include_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/CaseClient/include)
+
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 
-
-link_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/libAFoundation/lib/linux)
-link_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/libABase/lib/linux)
-link_directories(${PROJECT_SOURCE_DIR}/../../000_Framework/CaseClient/lib/linux)
+include_directories(${ALIBROOTDIR}/libAFoundation/include)
+include_directories(${ALIBROOTDIR}/libABase/include)
+include_directories(${ALIBROOTDIR}/CaseClient/include)
+link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
+link_directories(${ALIBROOTDIR}/libABase/lib/linux)
+link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
 
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
 
