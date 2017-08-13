@@ -9,7 +9,6 @@ add_definitions($ENV{CXXFLAGS} $ENV{LDFLAGS})
 cmake_policy(SET CMP0015 NEW)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
 set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
 include_directories(./src)
 
@@ -20,7 +19,7 @@ include_directories(./consumes)
 include_directories(${CMAKE_SYSROOT}/usr/include)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib)
-link_directories(lib)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pthread -std=c++11 -fPIC")
 
 OPTION(USE_INSTALLED_COMMONAPI "Set to OFF to use the local (build tree) version of CommonAPI" ON)
@@ -55,6 +54,7 @@ include_directories(${ALIBROOTDIR}/CaseClient/include)
 #link_directories(${ALIBROOTDIR}/libABase/lib/linux)
 #link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
 link_directories(${CMAKE_SYSROOT}/lib)
+link_directories(${CMAKE_SYSROOT}/usr/lib)
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
 MESSAGE(STATUS "ADAS are looking for lib in dir " ${CMAKE_SYSROOT})
 MESSAGE(STATUS "This is binary ADAS dir " ${PROJECT_SOURCE_DIR})
