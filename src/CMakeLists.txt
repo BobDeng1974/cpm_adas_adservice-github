@@ -51,12 +51,12 @@ include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 include_directories(${ALIBROOTDIR}/libAFoundation/include)
 include_directories(${ALIBROOTDIR}/libABase/include)
 include_directories(${ALIBROOTDIR}/CaseClient/include)
-link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
-link_directories(${ALIBROOTDIR}/libABase/lib/linux)
-link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
-
+#link_directories(${ALIBROOTDIR}/libAFoundation//linux)
+#link_directories(${ALIBROOTDIR}/libABase/lib/linux)
+#link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
+link_directories(${CMAKE_SYSROOT}/lib)
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
-
+MESSAGE(STATUS "ADAS are looking for lib in dir " ${CMAKE_SYSROOT})
 MESSAGE(STATUS "This is binary ADAS dir " ${PROJECT_SOURCE_DIR})
 
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src MAIN_SRC)
