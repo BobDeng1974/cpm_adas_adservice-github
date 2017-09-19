@@ -16,8 +16,84 @@
 #include <unistd.h>
 #include "CAdasManagerGWMv2.h"
 #include "MessageForQueue.h"
+
 using namespace std;
 using namespace Harman::Adas::AProject::GWMV2MH;
+
+/***********************just for R2 test******************begin***********/
+#include <map>
+#include "AFoundation.h"
+#include "ReserveCamera.h"
+#include "CameraStateMachineGWMv2.h"
+#include "CameraHubGWMv2.h"
+
+using Harman::Adas::AFramework::AFoundation::StateMachine;
+using Harman::Adas::AFramework::AFoundation::Observer;
+using Harman::Adas::AFramework::ABase::ADASManager::ReserveCamera;
+using Harman::Adas::AProject::GWMV2MH::Camera::CameraHubGWMv2;
+using Harman::Adas::AProject::GWMV2MH::Camera::CameraStateMachineGWMv2;
+
+class FakeRVC : public Observer
+{
+public:
+    FakeRVC(const string& name, CameraHub* hub)
+        : Observer(name)
+        , m_pHub(hub)
+    {
+        m_pReserveCamera = (ReserveCamera*)m_pHub->SubscribeToReserveCamera(this);
+
+        m_CamerasState[RESERVECAMERANAME] = m_pReserveCamera->GetCameraState();
+        ALOGI("FakeRVC : init : %s with state : %d !!!\n", RESERVECAMERANAME, m_CamerasState[RESERVECAMERANAME]);
+
+        ALOGI("FakeRVC : OpenCamera\n");
+        m_pReserveCamera->OpenCamera();
+
+        ALOGI("FakeRVC : StartCapture\n");
+        m_pReserveCamera->StartCapture();
+
+        while(1) {
+            sleep(3);
+            m_pReserveCamera->StartCapture();
+        };
+
+        ALOGI("FakeRVC : StopCapture\n");
+        m_pReserveCamera->StopCapture();
+
+        ALOGI("FakeRVC : CloseCamera\n");
+        m_pReserveCamera->CloseCamera();
+    }
+
+    VOID Update(Subject* subject, Int32 status) {
+        // if(subject->GetSubjectName().compare(FRONTCAMERANAME) == 0){
+        //     ALOGI("m_CamerasState Update by : %s with state : %d !!!\n", FRONTCAMERANAME, status);
+        // } else if (subject->GetSubjectName().compare(RESERVECAMERANAME) == 0){
+        //     ALOGI("m_CamerasState Update by : %s with state : %d !!!\n", RESERVECAMERANAME, status);
+        // } else if (subject->GetSubjectName().compare(LEFTCAMERANAME) == 0){
+        //     ALOGI("m_CamerasState Update by : %s with state : %d !!!\n", LEFTCAMERANAME, status);
+        // } else if (subject->GetSubjectName().compare(RIGHTCAMERANAME) == 0){
+        //     ALOGI("m_CamerasState Update by : %s with state : %d !!!\n", RIGHTCAMERANAME, status);
+        // } else {
+        //     ALOGE("m_CamerasState Update by unknow camera with state : %d !!!\n", status);
+        // }
+
+        ALOGI("m_CamerasState Update by : %s with state : %d !!!\n", subject->GetSubjectName().c_str(), status);
+
+        m_CamerasState[subject->GetSubjectName()] = status;
+    }
+
+    ~FakeRVC() {
+        m_pHub->CancelSubscribeToReserveCamera(this);
+        //m_pHub->CancelSubscribeToRightCamera(this);
+    }
+
+private:
+    map<string, Int32> m_CamerasState;
+    CameraHub* m_pHub;
+
+    ReserveCamera* m_pReserveCamera;
+    //Camera* m_pRightCamera;
+};
+/***********************just for R2 test**********************end*******/
 
 int main(int argc, char **argv) {
 	CommonAPI::Runtime::setProperty("LogContext", "adas");
@@ -35,28 +111,36 @@ int main(int argc, char **argv) {
 	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
 	std::string domain = "local";
 
-		std::string PASServiceInst0_prov_connection = "adas";
-		std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
-		std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::PASServiceStubImpl>();
-		runtime->registerService(domain, PASServiceInst0_prov_instance, PASServiceInst0_prov_svc, PASServiceInst0_prov_connection);
-	
-		std::string AdasServiceInst0_prov_connection = "adas";
-		std::string AdasServiceInst0_prov_instance = "adas.AdasServiceInst0";
-		std::shared_ptr<v0::com::harman::adas::AdasServiceStubImpl> AdasServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AdasServiceStubImpl>();
-		runtime->registerService(domain, AdasServiceInst0_prov_instance, AdasServiceInst0_prov_svc, AdasServiceInst0_prov_connection);
-	
-		std::string AVMServiceInst0_prov_connection = "adas";
-		std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
-		std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AVMServiceStubImpl>();
-		runtime->registerService(domain, AVMServiceInst0_prov_instance, AVMServiceInst0_prov_svc, AVMServiceInst0_prov_connection);
-	
-		CAdasManagerGWMv2::getInstance()->start();
-		CAdasManagerGWMv2::getInstance()->pushMessage(new MessageForQueue(0,0, string("456")));
-		CAdasManagerGWMv2::getInstance()->join();
-    
+	std::string PASServiceInst0_prov_connection = "adas";
+	std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
+	std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::PASServiceStubImpl>();
+	runtime->registerService(domain, PASServiceInst0_prov_instance, PASServiceInst0_prov_svc, PASServiceInst0_prov_connection);
+
+	std::string AdasServiceInst0_prov_connection = "adas";
+	std::string AdasServiceInst0_prov_instance = "adas.AdasServiceInst0";
+	std::shared_ptr<v0::com::harman::adas::AdasServiceStubImpl> AdasServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AdasServiceStubImpl>();
+	runtime->registerService(domain, AdasServiceInst0_prov_instance, AdasServiceInst0_prov_svc, AdasServiceInst0_prov_connection);
+
+	std::string AVMServiceInst0_prov_connection = "adas";
+	std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
+	std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AVMServiceStubImpl>();
+	runtime->registerService(domain, AVMServiceInst0_prov_instance, AVMServiceInst0_prov_svc, AVMServiceInst0_prov_connection);
+
+	/***********************just for R2 test******************begin***********/
+	// CAdasManagerGWMv2::getInstance()->start();
+	// CAdasManagerGWMv2::getInstance()->pushMessage(new MessageForQueue(0,0, string("456")));
+	// CAdasManagerGWMv2::getInstance()->join();
+    Observer* o = new FakeRVC("FakeRVC", CameraHubGWMv2::GetInstanceC11(4));
+    /***********************just for R2 test**********************end*******/
+
     while (true) {
         std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(60));
     }
+
+    /***********************just for R2 test******************begin***********/
+    delete o;
+    /***********************just for R2 test**********************end*******/
+
     return 0;
 }
