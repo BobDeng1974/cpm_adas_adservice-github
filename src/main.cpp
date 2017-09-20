@@ -23,7 +23,7 @@ using namespace Harman::Adas::AProject::GWMV2MH;
 /***********************just for R2 test******************begin***********/
 #include <map>
 #include "AFoundation.h"
-#include "ReserveCamera.h"
+#include "ADASManager/Camera/ReserveCamera.h"
 #include "CameraStateMachineGWMv2.h"
 #include "CameraHubGWMv2.h"
 
