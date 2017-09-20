@@ -74,7 +74,6 @@ provides/AdasServiceStubImpl.cpp
 target_link_libraries(
 adas
 adas_adas_types_static_stub
-AFoundation ABase ACaseSocket
+AFoundation ABase ACaseSocket wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application
 -Wl,--no-undefined,--as-needed CommonAPI
 rt)
-

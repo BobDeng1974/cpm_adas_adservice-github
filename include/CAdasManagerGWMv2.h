@@ -17,8 +17,9 @@ public:
     virtual ~CAdasManagerGWMv2();
 
     VOID init();
-	//dedicated to case client mocker
-	VOID vCaseCallbackGWMv2(const string& strMockIPC);
+
+    //dedicated to case client mocker
+    VOID vCaseCallbackGWMv2(const string& strMockIPC);
 
 protected:
     CAdasManagerGWMv2();
