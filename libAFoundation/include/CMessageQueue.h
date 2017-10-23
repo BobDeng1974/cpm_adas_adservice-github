@@ -15,18 +15,18 @@ namespace Adas {
 namespace AFramework {
 namespace AFoundation {
 
+#define MSQ_MAXSIZE   300
+
 class CMessageQueue
 {
-public:    // class enum struct
+public:
     enum EType
     {
         ET_BLOCK        = 0X00000001,
         ET_NONBLOCK     = 0X00000002,
     };
 
-private: // class enum struct
-
-public: // method
+public:
     CMessageQueue(const string& strMsgQueueName, UInt32 uiQueueMaxSize, CMessageHandler* pHandler);
     virtual ~CMessageQueue();
 
@@ -36,29 +36,15 @@ public: // method
     BOOLEAN            isEmpty();
     //virtual VOID  blockHandleMessageQueue();
 
-protected:    // method
+protected:
     VOID    _handleMessageQueue();
 
-private:    // method
-
-protected:    // data
-    //BOOLEAN     m_bQuit;
-
-private:    // data
+private:
     string                    m_strMsgQueueName;
     queue<MessageForQueue*>     m_iMsgQueue;
-#ifdef QNX_OS
-    pthread_mutex_t mEventlockMutex;
-    pthread_cond_t  mWaitEventCondVar;
-#endif
-#ifdef LINUX_OS
-    mutex mEventlockMutex;
-    condition_variable  mWaitEventCondVar;
-#endif
-#ifdef WIN_OS
-    Poco::Mutex mEventlockMutex;
-    //std::condition_variable  mWaitEventCondVar;
-#endif
+
+
+
     MessageForQueue* m_pEventData;
 
     CMessageHandler* m_pHandler;

@@ -1,5 +1,4 @@
 #include "CAdasManagerGWMv2.h"
-#include "AdasModuleCtrlImpl.h"
 #include "CMessageQueue.h"
 #include "CMessageHandler.h"
 #include "Rvc/RvcMsgQDefine.h"
@@ -11,7 +10,7 @@ namespace AProject {
 namespace GWMV2MH {
 
 string moduleTab[] = {
-    string("RVC"),
+    ADAS_MODULE_RVC,
     STRING_NULL
 };
 
@@ -37,10 +36,9 @@ VOID CAdasManagerGWMv2::deleteInstance()
 }
 
 CAdasManagerGWMv2::CAdasManagerGWMv2()
-    :CAdasManager(string("adas"), new CMessageQueue(string("adas"), 300, (CMessageHandler*)(AdasModuleCtrlImpl::getInstance())))
+    :CMQRunnableService(string("adas"), new CMessageQueue(string("adas"), 9, (CMessageHandler*)(AdasModuleCtrlImpl::getInstance())))
 {
     ALOGD("CAdasManagerGWMv2\n");
-     REGCB_CCR(makeFunctor(this, &CAdasManagerGWMv2::vCaseCallbackGWMv2));
 }
 
 CAdasManagerGWMv2::~CAdasManagerGWMv2()
@@ -48,9 +46,10 @@ CAdasManagerGWMv2::~CAdasManagerGWMv2()
     ;
 }
 
-VOID CAdasManagerGWMv2::init()
+
+BOOLEAN CAdasManagerGWMv2::initialize(string sServiceName)
 {
-    ALOGD("init\n");
+    ALOGD("******init ServiceName[%s]********\n", sServiceName.c_str());
 
     BYTE cameraFlag = 0;
     for(auto mode : moduleTab)
@@ -66,7 +65,7 @@ VOID CAdasManagerGWMv2::init()
         }
         else if(mode == ADAS_MODULE_AVM)
         {
-            cameraFlag |= s_AVM_Map_Cameras;
+            cameraFlag |= s_AVM_Map_Cameras;make 
         }
         else if(mode == ADAS_MODULE_PAS)
         {
@@ -82,14 +81,16 @@ VOID CAdasManagerGWMv2::init()
         }
         #endif
     }
+
     AdasModuleCtrlImpl::getInstance()->CreateModules(moduleTab, cameraFlag);
+
     AdasModuleCtrlImpl::getInstance()->ModuleInit();
+    return TRUE;
 }
 
 VOID CAdasManagerGWMv2::vCaseCallbackGWMv2(const string& strMockIPC)
 {
-	ALOGD("CAdasManagerGWMv2 received Mock IPC :%s  \n", strMockIPC.c_str());
-	vCaseCallback(strMockIPC.c_str());
+
 }
 
 }

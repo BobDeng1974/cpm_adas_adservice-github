@@ -47,6 +47,7 @@ a_status AdasModuleCtrlImpl::CreateModules(string moduleTab[], BYTE cameraFlag)
      camerahub = CameraHubGWMv2::GetInstanceC11(cameraFlag);
      for(int index=0; moduleTab[index] != STRING_NULL; ++index)
     {
+        
         if(moduleTab[index] == ADAS_MODULE_RVC)
         {
             m_mModuleMap.insert(makePair((UInt32)eModuleType_RVC, static_cast<ModuleBase*>(new RvcStubImpl(camerahub))));

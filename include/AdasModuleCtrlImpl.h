@@ -2,6 +2,9 @@
 #define ADAS_MODULE_CTRL_IMPL_H_
 
 #include "ADASManager/AdasModuleCtrl.h"
+#include "TraceMacros.h"
+
+using namespace Harman::Adas::AFramework::AFoundation;
 
 using namespace Harman::Adas::AFramework::ABase::ADASManager;
 
@@ -12,6 +15,19 @@ namespace GWMV2MH {
 
 class AdasModuleCtrlImpl : public AdasModuleCtrl
 {
+public:
+    enum eModuleType
+    {
+        eModuleType_RVC,
+        eModuleType_SVC,
+        eModuleType_AVM,
+        eModuleType_PAS,
+        eModuleType_APA,
+        eModuleType_COMMON,
+
+        eModuleType_UNKNOWN = 0x70000000
+    };
+    
 public:
     static AdasModuleCtrlImpl*   getInstance();
     static VOID             deInstance();

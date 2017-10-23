@@ -2,6 +2,9 @@
 #define  RVC_STUB_IMPL_H_
 
 #include "ADASManager/RVC/ARvcBase.h"
+#include "TraceMacros.h"
+
+using namespace Harman::Adas::AFramework::AFoundation;
 
 
 using namespace std;
@@ -19,10 +22,10 @@ public:
 	virtual ~RvcStubImpl();
 
 public:
-	a_status  initialize();
-              VOID       afterHandleMessageQueue();
+	virtual a_status   initialize();
+    VOID    	afterHandleMessageQueue();
 
-              VOID      showCamera(const string& pData);
+    VOID    	showCamera(const string& pData);
 
 private:
 		
