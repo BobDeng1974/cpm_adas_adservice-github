@@ -1,6 +1,10 @@
 #ifndef _C_ADAS_MANAGER_GWMV2_H_
 #define _C_ADAS_MANAGER_GWMV2_H_
-#include "ADASManager/CAdasManager.h"
+#include "CMQRunnableService.h"
+#include "AdasModuleCtrlImpl.h"
+#include "TraceMacros.h"
+
+using namespace Harman::Adas::AFramework::AFoundation;
 
 using namespace Harman::Adas::AFramework::ABase::ADASManager;
 
@@ -9,14 +13,14 @@ namespace Adas {
 namespace AProject {
 namespace GWMV2MH {
 
-class CAdasManagerGWMv2 : public CAdasManager
+class CAdasManagerGWMv2 : public CMQRunnableService
 {
 public:
     static CAdasManagerGWMv2* 	getInstance();
     static VOID				deleteInstance();
     virtual ~CAdasManagerGWMv2();
 
-    VOID init();
+    virtual BOOLEAN initialize(string sServiceName);
 
     //dedicated to case client mocker
     VOID vCaseCallbackGWMv2(const string& strMockIPC);

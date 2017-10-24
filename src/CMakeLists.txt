@@ -46,34 +46,44 @@ add_definitions(-DLINUX_OS)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
+include_directories(${PROJECT_SOURCE_DIR}/include/Client)
 
 include_directories(${ALIBROOTDIR}/libAFoundation/include)
 include_directories(${ALIBROOTDIR}/libABase/include)
 include_directories(${ALIBROOTDIR}/CaseClient/include)
-#link_directories(${ALIBROOTDIR}/libAFoundation//linux)
-#link_directories(${ALIBROOTDIR}/libABase/lib/linux)
-#link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
+
+link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
+link_directories(${ALIBROOTDIR}/libABase/lib/linux)
+link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
 link_directories(${CMAKE_SYSROOT}/lib)
-link_directories(${CMAKE_SYSROOT}/usr/lib)
+
+
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
+
 MESSAGE(STATUS "ADAS are looking for lib in dir " ${CMAKE_SYSROOT})
 MESSAGE(STATUS "This is binary ADAS dir " ${PROJECT_SOURCE_DIR})
 
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src MAIN_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Camera CAM_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Rvc RVC_SRC)
+AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Client CLIENT_SRC)
 
 
 add_executable(
 adas
-${MAIN_SRC} ${CAM_SRC} ${RVC_SRC}
-provides/AVMServiceStubImpl.cpp
-provides/PASServiceStubImpl.cpp
-provides/AdasServiceStubImpl.cpp
+${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}
+
+provides/v0/com/harman/adas/AdasServiceStubImpl.cpp
+provides/v0/com/harman/adas/PASServiceStubImpl.cpp
+provides/v0/com/harman/adas/RvcServiceStubImpl.cpp
+provides/v0/com/harman/adas/AVMServiceStubImpl.cpp
+provides/v0/com/harman/adas/APAServiceStubImpl.cpp
 )
+
 target_link_libraries(
 adas
 adas_adas_types_static_stub
-AFoundation ABase ACaseSocket wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application
+AFoundation ABase ACaseSocket dlt
+wayland-client wayland-egl GLESv2 EGL ivi-application
 -Wl,--no-undefined,--as-needed CommonAPI
 rt)

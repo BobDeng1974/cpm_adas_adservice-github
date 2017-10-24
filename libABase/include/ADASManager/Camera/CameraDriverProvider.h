@@ -8,6 +8,9 @@
 #include "TraceMacros.h"
 #include "CameraEventDefine.h"
 #include <map>
+#include "AFoundation.h"
+
+using namespace Harman::Adas::AFramework::AFoundation;
 
 using Harman::Adas::AFramework::AFoundation::CRunableBase;
 
@@ -43,6 +46,8 @@ public:
     virtual Int32 GetCapture() = 0;
 
     virtual Int32 StopCapture() = 0;
+
+    virtual VOID init(){};
 
     virtual ~CameraDriverProvider() {}
 
