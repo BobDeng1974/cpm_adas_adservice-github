@@ -39,7 +39,9 @@ using Harman::Adas::AProject::GWMV2MH::Camera::CameraHubGWMv2;
 using Harman::Adas::AProject::GWMV2MH::Camera::CameraStateMachineGWMv2;
 
 int main(int argc, char **argv) {
-    PRINTINIT;
+    #ifdef DLTLOG
+        PRINTINIT;
+    #endif
 	CommonAPI::Runtime::setProperty("LogContext", "adas");
 	CommonAPI::Runtime::setProperty("LibraryBase", "adas");
 
@@ -104,6 +106,10 @@ int main(int argc, char **argv) {
 
     delete receiver;
     receiver = NULL;
-    PRINTDEINIT;
+
+    #ifdef DLTLOG
+        PRINTDEINIT;
+    #endif
+        
     return 0;
 }
