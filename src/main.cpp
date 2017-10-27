@@ -25,19 +25,6 @@
 using namespace std;
 using namespace Harman::Adas::AProject::GWMV2MH;
 
-/***********************just for R2 test******************begin***********/
-#include <map>
-#include "AFoundation.h"
-#include "ADASManager/Camera/ReserveCamera.h"
-#include "CameraStateMachineGWMv2.h"
-#include "CameraHubGWMv2.h"
-
-using Harman::Adas::AFramework::AFoundation::StateMachine;
-using Harman::Adas::AFramework::AFoundation::Observer;
-using Harman::Adas::AFramework::ABase::ADASManager::ReserveCamera;
-using Harman::Adas::AProject::GWMV2MH::Camera::CameraHubGWMv2;
-using Harman::Adas::AProject::GWMV2MH::Camera::CameraStateMachineGWMv2;
-
 int main(int argc, char **argv) {
     #ifdef DLTLOG
         PRINTINIT;
@@ -57,32 +44,20 @@ int main(int argc, char **argv) {
 	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
 	std::string domain = "local";
 
-	// std::string AVMServiceInst0_prov_connection = "adas";
- //    std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
- //    std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AVMServiceStubImpl>();
- //    runtime->registerService(domain, AVMServiceInst0_prov_instance, AVMServiceInst0_prov_svc, AVMServiceInst0_prov_connection);
+    std::string AVMServiceInst0_prov_connection = "adas";
+    std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
+    std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AVMServiceStubImpl>();
+    runtime->registerService(domain, AVMServiceInst0_prov_instance, AVMServiceInst0_prov_svc, AVMServiceInst0_prov_connection);
 
     std::string AdasServiceInst0_prov_connection = "adas";
     std::string AdasServiceInst0_prov_instance = "adas.AdasServiceInst0";
     std::shared_ptr<v0::com::harman::adas::AdasServiceStubImpl> AdasServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AdasServiceStubImpl>();
     runtime->registerService(domain, AdasServiceInst0_prov_instance, AdasServiceInst0_prov_svc, AdasServiceInst0_prov_connection);
 
-    std::cout << "1" << std::endl;
-
     std::string RvcServiceInst0_prov_connection = "adas";
     std::string RvcServiceInst0_prov_instance = "adas.RvcServiceInst0";
     std::shared_ptr<v0::com::harman::adas::RvcServiceStubImpl> RvcServiceInst0_prov_svc = std::shared_ptr<v0::com::harman::adas::RvcServiceStubImpl>(RvcServiceStubImplGWM::getInstance());
-    runtime->registerService(domain, RvcServiceInst0_prov_instance, 
-        RvcServiceInst0_prov_svc,
-        RvcServiceInst0_prov_connection);
-
-    // std::string RvcServiceInst0_prov_connection = "adas";
-    // std::string RvcServiceInst0_prov_instance = "adas.RvcServiceInst0";
-    // std::shared_ptr<v0::com::harman::adas::RvcServiceStubImpl> RvcServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::RvcServiceStubImpl>();
-    // runtime->registerService(domain, RvcServiceInst0_prov_instance, RvcServiceInst0_prov_svc, RvcServiceInst0_prov_connection);
-
-
-     std::cout << "2" << std::endl;
+    runtime->registerService(domain, RvcServiceInst0_prov_instance, RvcServiceInst0_prov_svc, RvcServiceInst0_prov_connection);
 
     std::string PASServiceInst0_prov_connection = "adas";
     std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
@@ -93,7 +68,6 @@ int main(int argc, char **argv) {
     std::string APAServiceInst0_prov_instance = "adas.APAServiceInst0";
     std::shared_ptr<v0::com::harman::adas::APAServiceStubImpl> APAServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::APAServiceStubImpl>();
     runtime->registerService(domain, APAServiceInst0_prov_instance, APAServiceInst0_prov_svc, APAServiceInst0_prov_connection);
-
 
 	CAdasManagerGWMv2::getInstance()->start();
 
@@ -110,6 +84,6 @@ int main(int argc, char **argv) {
     #ifdef DLTLOG
         PRINTDEINIT;
     #endif
-        
+
     return 0;
 }
