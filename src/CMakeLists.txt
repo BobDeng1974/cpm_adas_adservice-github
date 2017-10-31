@@ -52,9 +52,9 @@ include_directories(${ALIBROOTDIR}/libAFoundation/include)
 include_directories(${ALIBROOTDIR}/libABase/include)
 include_directories(${ALIBROOTDIR}/CaseClient/include)
 
-#link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
-#link_directories(${ALIBROOTDIR}/libABase/lib/linux)
-#link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
+link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
+link_directories(${ALIBROOTDIR}/libABase/lib/linux)
+link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
 link_directories(${CMAKE_SYSROOT}/lib)
 link_directories(${CMAKE_SYSROOT}/usr/lib)
 
