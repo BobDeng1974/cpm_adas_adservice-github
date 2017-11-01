@@ -58,15 +58,6 @@ include_directories(${ALIBROOTDIR}/CaseClient/include)
 link_directories(${CMAKE_SYSROOT}/lib)
 link_directories(${CMAKE_SYSROOT}/usr/lib)
 
-include_directories(${ALIBROOTDIR}/../../000_Framework/libAFoundation/include)
-include_directories(${ALIBROOTDIR}/../../000_Framework/libABase/include)
-include_directories(${ALIBROOTDIR}/../../000_Framework/CaseClient/include)
-
-link_directories(${ALIBROOTDIR}/../../000_Framework/libAFoundation/lib/linux)
-link_directories(${ALIBROOTDIR}/../../000_Framework/libABase/lib/linux)
-link_directories(${ALIBROOTDIR}/../../000_Framework/CaseClient/lib/linux)
-
-
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
 
 MESSAGE(STATUS "ADAS are looking for lib in dir " ${CMAKE_SYSROOT})
