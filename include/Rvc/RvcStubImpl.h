@@ -23,9 +23,10 @@ public:
 
 public:
 	virtual a_status   initialize();
-    VOID    	afterHandleMessageQueue();
+    VOID  afterHandleMessageQueue();
 
-    VOID    	showCamera(const string& pData);
+    VOID  showCamera(const string& pData);
+    VOID  hideCamera(const string& pData);   
 
 private:
 		

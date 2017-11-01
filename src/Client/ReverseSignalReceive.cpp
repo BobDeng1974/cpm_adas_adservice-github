@@ -39,10 +39,6 @@ VOID ReverseSignalReceive::GPIOCALLBACK(unsigned int value)
 			AdasModuleCtrlImpl::eModuleType_RVC,
 			eCameraActivate_ON,
 			"456"));
-
-		RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(
-			::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_ON
-			);
 	}
 	else if(REVERSE_GEAR_HAS_GONE == value)
 	{
@@ -51,10 +47,6 @@ VOID ReverseSignalReceive::GPIOCALLBACK(unsigned int value)
 			AdasModuleCtrlImpl::eModuleType_RVC,
 			eCameraActivate_OFF,
 			"789"));
-
-		RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(
-			::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_OFF
-			);
 	}
 }
 
