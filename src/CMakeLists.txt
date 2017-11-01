@@ -53,7 +53,7 @@ include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/CaseClient)
 
-link_directories(${CMAKE_SYSROOT}/opt/adas/lib)
+link_directories(${CMAKE_SYSROOT}/usr/lib/adas)
 
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
 
