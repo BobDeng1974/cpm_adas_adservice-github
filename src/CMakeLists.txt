@@ -48,15 +48,12 @@ include_directories(${PROJECT_SOURCE_DIR}/include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 include_directories(${PROJECT_SOURCE_DIR}/include/Client)
 
-include_directories(${ALIBROOTDIR}/libAFoundation/include)
-include_directories(${ALIBROOTDIR}/libABase/include)
-include_directories(${ALIBROOTDIR}/CaseClient/include)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAFoundation)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/CaseClient)
 
-#link_directories(${ALIBROOTDIR}/libAFoundation/lib/linux)
-#link_directories(${ALIBROOTDIR}/libABase/lib/linux)
-#link_directories(${ALIBROOTDIR}/CaseClient/lib/linux)
-link_directories(${CMAKE_SYSROOT}/lib)
-link_directories(${CMAKE_SYSROOT}/usr/lib)
+link_directories(${CMAKE_SYSROOT}/usr/lib/adas)
 
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/linux)
 
