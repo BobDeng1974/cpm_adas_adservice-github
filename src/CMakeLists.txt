@@ -19,6 +19,7 @@ include_directories(./consumes)
 include_directories(${CMAKE_SYSROOT}/usr/include)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib)
+link_directories(${CMAKE_SYSROOT}/lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pthread -std=c++11 -fPIC")
 
