@@ -48,10 +48,10 @@ include_directories(${PROJECT_SOURCE_DIR}/include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 include_directories(${PROJECT_SOURCE_DIR}/include/Client)
 
-include_directories(${CMAKE_SYSROOT}/usr/include/libAFoundation)
-include_directories(${CMAKE_SYSROOT}/usr/include/libABase)
-include_directories(${CMAKE_SYSROOT}/usr/include/libAGraphic)
-include_directories(${CMAKE_SYSROOT}/usr/include/CaseClient)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAFoundation)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/CaseClient)
 
 link_directories(${CMAKE_SYSROOT}/opt/adas/lib)
 
