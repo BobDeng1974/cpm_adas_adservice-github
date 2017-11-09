@@ -43,7 +43,13 @@ VOID  RvcStubImpl::showCamera(const string& pData)
 
     if(camState == CAM_ON)
     {
-    	RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_ON);
+    	ALOGI("notify hmi show camera [%s]\n", pData.c_str());
+        RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_ON);
+    }
+    if(camState == CAM_ERROR)
+    {
+        ALOGI("notify hmi show camera error [%s]\n", pData.c_str());
+        RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_UNAVAILABLE);
     }
 }
 
@@ -53,8 +59,14 @@ VOID  RvcStubImpl::hideCamera(const string& pData)
 
 	if(camState == CAM_ON)
 	{
-		RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_OFF);
+		ALOGI("notify hmi hide camera [%s]\n", pData.c_str());
+        RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_OFF);
 	}
+    if(camState == CAM_ERROR)
+    {
+        ALOGI("notify hmi hide camera error [%s]\n", pData.c_str());
+        RvcServiceStubImplGWM::getInstance()->setRvcStateAttribute(::v0::com::harman::adas::RVCBaseType::enRvcState::e_RVC_UNAVAILABLE);
+    }
 }
 
 
