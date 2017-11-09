@@ -1,6 +1,9 @@
 #include "AdasModuleCtrlImpl.h"
 #include "Rvc/RvcStubImpl.h"
 #include "Rvc/RvcMsgQDefine.h"
+#include "Avm/AvmStubImpl.h"
+#include "Avm/AvmMsgQDefine.h"
+
 #include "ADASManager/Camera/CameraHub.h"
 #include "Camera/CameraHubGWMv2.h"
 
@@ -47,12 +50,17 @@ a_status AdasModuleCtrlImpl::CreateModules(string moduleTab[], BYTE cameraFlag)
      camerahub = CameraHubGWMv2::GetInstanceC11(cameraFlag);
      for(int index=0; moduleTab[index] != STRING_NULL; ++index)
     {
-        
         if(moduleTab[index] == ADAS_MODULE_RVC)
         {
             m_mModuleMap.insert(makePair((UInt32)eModuleType_RVC, static_cast<ModuleBase*>(new RvcStubImpl(camerahub))));
             ALOGI("CreateModules [%s]\n", moduleTab[index].c_str());
         }
+        else if(moduleTab[index] == ADAS_MODULE_AVM)
+        {
+            m_mModuleMap.insert(makePair((UInt32)eModuleType_AVM, static_cast<ModuleBase*>(new CAvmStubImpl())));
+            ALOGI("CreateModules [%s]\n", moduleTab[index].c_str());
+
+        }		
         #if 0
         else if(moduleTab[index] == ADAS_MODULE_SVC)
         {
@@ -74,12 +82,14 @@ a_status AdasModuleCtrlImpl::CreateModules(string moduleTab[], BYTE cameraFlag)
         {}
         #endif
     }
+    return OK;
 }
 
 a_status AdasModuleCtrlImpl::ModuleInit()
 {
     ALOGD("ModuleInit\n");
     initialize();
+    return OK;
 }
 
 
