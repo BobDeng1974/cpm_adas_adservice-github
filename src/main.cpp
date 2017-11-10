@@ -13,6 +13,7 @@
 #include "provides/v0/com/harman/adas/AVMServiceStubImpl.hpp"
 #include "provides/v0/com/harman/adas/APAServiceStubImpl.hpp"
 #include "RvcServiceStubImplGWM.h"
+#include "AvmProxy.h"
 
 #include <iostream>
 #include <memory>
@@ -42,11 +43,12 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
+	std::cout << "Avm" << std::endl;
 	std::string domain = "local";
 
     std::string AVMServiceInst0_prov_connection = "adas";
     std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
-    std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::AVMServiceStubImpl>();
+    std::shared_ptr<v0::com::harman::adas::AVMServiceStubImpl> AVMServiceInst0_prov_svc(CAvmProxy::getInstance());
     runtime->registerService(domain, AVMServiceInst0_prov_instance, AVMServiceInst0_prov_svc, AVMServiceInst0_prov_connection);
 
     std::string AdasServiceInst0_prov_connection = "adas";

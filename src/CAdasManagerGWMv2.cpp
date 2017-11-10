@@ -2,6 +2,7 @@
 #include "CMessageQueue.h"
 #include "CMessageHandler.h"
 #include "Rvc/RvcMsgQDefine.h"
+#include "Avm/AvmMsgQDefine.h"
 #include "ADASManager/Camera/CameraEventDefine.h"
 
 namespace Harman {
@@ -11,6 +12,7 @@ namespace GWMV2MH {
 
 string moduleTab[] = {
     ADAS_MODULE_RVC,
+    ADAS_MODULE_AVM,
     STRING_NULL
 };
 
@@ -50,6 +52,7 @@ CAdasManagerGWMv2::~CAdasManagerGWMv2()
 BOOLEAN CAdasManagerGWMv2::initialize(string sServiceName)
 {
     ALOGD("******init ServiceName[%s]********\n", sServiceName.c_str());
+	ALOGI("******init ServiceName[%s]********\n", sServiceName.c_str());
 
     BYTE cameraFlag = 0;
     for(auto mode : moduleTab)
@@ -58,6 +61,10 @@ BOOLEAN CAdasManagerGWMv2::initialize(string sServiceName)
         {
             cameraFlag |= s_RVC_Map_Cameras;
         }
+        else if(mode == ADAS_MODULE_AVM)
+        {
+            cameraFlag |= s_AVM_Map_Cameras;
+        }		
         #if 0
         else if(mode == ADAS_MODULE_SVC)
         {
