@@ -13,6 +13,7 @@
 #include "provides/v0/com/harman/adas/AVMServiceStubImpl.hpp"
 #include "provides/v0/com/harman/adas/APAServiceStubImpl.hpp"
 #include "RvcServiceStubImplGWM.h"
+#include "PasServiceStubImplGWM.h"
 #include "AvmProxy.h"
 
 #include <iostream>
@@ -30,21 +31,20 @@ int main(int argc, char **argv) {
     #ifdef DLTLOG
         PRINTINIT;
     #endif
-	CommonAPI::Runtime::setProperty("LogContext", "adas");
-	CommonAPI::Runtime::setProperty("LibraryBase", "adas");
+    CommonAPI::Runtime::setProperty("LogContext", "adas");
+    CommonAPI::Runtime::setProperty("LibraryBase", "adas");
 
-	/*
-	 * create the runtime
-	 */
-	std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-	if(!runtime)
-	{
-		// Error: could not load runtime
-		return 1;
-	}
-	std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
-	std::cout << "Avm" << std::endl;
-	std::string domain = "local";
+    /*
+     * create the runtime
+     */
+    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
+    if(!runtime)
+    {
+        // Error: could not load runtime
+        return 1;
+    }
+    std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
+    std::string domain = "local";
 
     std::string AVMServiceInst0_prov_connection = "adas";
     std::string AVMServiceInst0_prov_instance = "adas.AVMServiceInst0";
@@ -61,17 +61,17 @@ int main(int argc, char **argv) {
     std::shared_ptr<v0::com::harman::adas::RvcServiceStubImpl> RvcServiceInst0_prov_svc = std::shared_ptr<v0::com::harman::adas::RvcServiceStubImpl>(RvcServiceStubImplGWM::getInstance());
     runtime->registerService(domain, RvcServiceInst0_prov_instance, RvcServiceInst0_prov_svc, RvcServiceInst0_prov_connection);
 
-    // std::string PASServiceInst0_prov_connection = "adas";
-    // std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
-    // std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::PASServiceStubImpl>();
-    // runtime->registerService(domain, PASServiceInst0_prov_instance, PASServiceInst0_prov_svc, PASServiceInst0_prov_connection);
+    std::string PASServiceInst0_prov_connection = "adas";
+    std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
+    std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc(PasServiceStubImplGWM::getInstance());
+    runtime->registerService(domain, PASServiceInst0_prov_instance, PASServiceInst0_prov_svc, PASServiceInst0_prov_connection);
 
     std::string APAServiceInst0_prov_connection = "adas";
     std::string APAServiceInst0_prov_instance = "adas.APAServiceInst0";
     std::shared_ptr<v0::com::harman::adas::APAServiceStubImpl> APAServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::APAServiceStubImpl>();
     runtime->registerService(domain, APAServiceInst0_prov_instance, APAServiceInst0_prov_svc, APAServiceInst0_prov_connection);
 
-	CAdasManagerGWMv2::getInstance()->start();
+    CAdasManagerGWMv2::getInstance()->start();
 
     ReverseSignalReceive* receiver = new ReverseSignalReceive();
 

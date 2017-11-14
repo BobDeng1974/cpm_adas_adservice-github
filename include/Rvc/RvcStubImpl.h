@@ -3,11 +3,12 @@
 
 #include "ADASManager/RVC/ARvcBase.h"
 #include "TraceMacros.h"
-
-using namespace Harman::Adas::AFramework::AFoundation;
-
+#include "AGraphic.h"
+#include "RvcGuideLine.h"
 
 using namespace std;
+using namespace Harman::Adas::AFramework::AFoundation;
+using namespace Harman::Adas::AFramework::AGraphic;
 using namespace Harman::Adas::AFramework::ABase::ADASManager;
 
 namespace Harman {
@@ -29,6 +30,7 @@ public:
     VOID  hideCamera(const string& pData);   
 
 private:
+	RvcGuideLine* m_pRvcGLine;
 		
 };
 
