@@ -7,7 +7,7 @@
 #include "Pas/PDCGraphicFord.h"
 #include "CMessageQueue.h"
 //concreate lib provide by graphic
-#include "PAS/GraphicCore/GraphicVPAFord.h"
+#include "ADASManager/PAS/GraphicCore/GraphicVPAFord.h"
 #include "Pas/FordPDCTest.h"
 
 namespace Harman {
@@ -47,18 +47,19 @@ PDCFactory::~PDCFactory()
 
 PDCFactory::PDCFactory()
 {
-	PDCA_LOG_INFO("PDCFactory() !\n");
+	PDCA_LOG_INFO("PDCFactory() !!!!!\n");
 }
 PDCServiceFord* PDCFactory::vSetup()
 {
 	printf(" [%s, %d]\n", __FUNCTION__, __LINE__);
+    printf(" [%s, %d]\n", __FUNCTION__, __LINE__);
 	CMessageQueue* pMsgQueue =NULL;
 #ifndef PRESCORE_SUPPORT
     pMsgQueue = new CMessageQueue("FordPDCQueue", 300, new PDCMsgHandlerFord());
 #endif
     //create ford graphic proecess client
     GraphicVPAFord* pGraphicVPAFord =new GraphicVPAFord();
-    if(pGraphicVPAFord->vInit(800,480))
+    if(pGraphicVPAFord->vInit(640,720))
 	{
 		PDCA_LOG_INFO("PDCFactory() vInit VPA graphic failed!\n");
 	}
@@ -78,18 +79,19 @@ PDCServiceFord* PDCFactory::vSetup()
 	//PDCGraphicFord* pPDCGraphicFord = new PDCGraphicFord(pGraphicPDCFord);
 
 
-	//create ford PDC app client -- lost first serveral msg
-	PDCServiceFord::getInstance()->vInitialize(pMsgQueue, pGraphicVPAFord);
-	//setup msg handler
+	// //create ford PDC app client -- lost first serveral msg
+	// PDCServiceFord::getInstance()->vInitialize(pMsgQueue, pGraphicVPAFord);
+	// //setup msg handler
 
-	//m_pVPAStubImpl=  new  VPAServiceStubImpl(m_pPDCServiceFord);
-	//m_pPDCServiceProxy=  new  PDCServiceProxy(m_pPDCServiceFord);
-	//run some test cases
+	// //m_pVPAStubImpl=  new  VPAServiceStubImpl(m_pPDCServiceFord);
+	// //m_pPDCServiceProxy=  new  PDCServiceProxy(m_pPDCServiceFord);
+	// //run some test cases
 
-	FordPDCTest* ptest = new FordPDCTest(PDCServiceFord::getInstance(),pGraphicVPAFord);
-	ptest->start();
-	return PDCServiceFord::getInstance();
-	//PDCServiceFord::getInstance()->join();
+	// FordPDCTest* ptest = new FordPDCTest(PDCServiceFord::getInstance(),pGraphicVPAFord);
+	// ptest->start();
+	// return PDCServiceFord::getInstance();
+	// //PDCServiceFord::getInstance()->join();
+    return nullptr;
 }
 
 } // namespace Pas

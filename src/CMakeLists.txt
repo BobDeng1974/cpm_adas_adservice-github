@@ -17,6 +17,7 @@ include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)
 include_directories(./consumes)
 include_directories(${CMAKE_SYSROOT}/usr/include)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic/GuideLine)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib)
 link_directories(${CMAKE_SYSROOT}/lib)
@@ -49,6 +50,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 include_directories(${PROJECT_SOURCE_DIR}/include/Client)
 include_directories(${PROJECT_SOURCE_DIR}/include/Avm)
+include_directories(${PROJECT_SOURCE_DIR}/include/Pas)
 
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAFoundation)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
@@ -67,11 +69,11 @@ AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Camera CAM_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Rvc RVC_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Client CLIENT_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Avm AVM_SRC)
-
+AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Pas PAS_SRC)
 
 add_executable(
 adas
-${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}  ${AVM_SRC}
+${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}  ${AVM_SRC} ${PAS_SRC}
 
 provides/v0/com/harman/adas/AdasServiceStubImpl.cpp
 provides/v0/com/harman/adas/PASServiceStubImpl.cpp
@@ -83,7 +85,7 @@ provides/v0/com/harman/adas/APAServiceStubImpl.cpp
 target_link_libraries(
 adas
 adas_adas_types_static_stub
-AFoundation ABase ACaseSocket dlt
-wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application nanomsg ilmCommon ilmClient ilmControl
+AFoundation ABase ACaseSocket AGraphic dlt
+wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application nanomsg ilmCommon ilmClient ilmControl nanomsg
 -Wl,--no-undefined,--as-needed CommonAPI
 rt)
