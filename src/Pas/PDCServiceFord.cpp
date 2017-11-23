@@ -2,14 +2,12 @@
 #include "Pas/PDCServiceFord.h"
 #include "Pas/PDCMsgDefineFord.h"
 
-#include "ADASManager/PAS/GraphicCore/GraphicVDT.h"
-
 #include "CMessage.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 using Harman::Adas::AFramework::AFoundation::tagBaseMessage;
-using Harman::Adas::AFramework::ABase::ADASManager::GraphicVDT;
+//using Harman::Adas::AFramework::ABase::ADASManager::GraphicVDT;
 
 namespace Harman {
 namespace Adas {
@@ -208,7 +206,7 @@ int s_cLastTxtVal =-1;
 	else
 	{
 		//auto hide guide line on PDC is not request any more
-		m_pVPAGraphicFord->bSetVDTDisable();
+//		m_pVPAGraphicFord->bSetVDTDisable();
 		PDCA_LOG_INFO("pause PDCServiceFord::onABMPDCMsg : %d\n",pdata[1]);
 		//setPDCStatusAttribute(v1::com::harman::ParkAssist::PDCBaseType::enPDCStatus::e_PDC_OFF);
 	}
@@ -296,11 +294,11 @@ void PDCServiceFord::onGuideLineCmd(const char* data)
 	}
 	if((eGUIDELINETXT_ON == (eFordGuideLineMsg)pdata[1])&& m_PDCSensorHub->bIsActive())
 	{
-		m_pVPAGraphicFord->bSetVDTEnable();
+//		m_pVPAGraphicFord->bSetVDTEnable();
 	}
 	else
 	{
-		m_pVPAGraphicFord->bSetVDTDisable();
+//		m_pVPAGraphicFord->bSetVDTDisable();
 	}
 }
 /*
@@ -333,134 +331,134 @@ long  R
 
 void PDCServiceFord::onGuideLineRadius(const char* data)
 {
-	//int* pdata = (int*)data;
-	std::string::size_type sz;
-	int i_dec = std::stoi(string(data), &sz);
-	int pdata[2] = {0, i_dec};
+	// //int* pdata = (int*)data;
+	// std::string::size_type sz;
+	// int i_dec = std::stoi(string(data), &sz);
+	// int pdata[2] = {0, i_dec};
 
-	if(pdata[0]>(int)ePDCSIGNUM)
-	{
-		PDCA_LOG_INFO("PDCServiceFord::onGuideLineRadius exceed: %d - %d\n",pdata[0],pdata[1]);
-	}
+	// if(pdata[0]>(int)ePDCSIGNUM)
+	// {
+	// 	PDCA_LOG_INFO("PDCServiceFord::onGuideLineRadius exceed: %d - %d\n",pdata[0],pdata[1]);
+	// }
 
-    //check current state to all sersor
-    int msgID = pdata[0];
-    int msgVAL = pdata[1];
-    static eFordGuideLineDriState vdtDir = eDIRNOTKNOW;
-    static int vdtStatus=0;
-    static int iDriveDir = 0;
-    static int shortRadius=0;
-    static int longRadius=0;
-	//if CAN send left and right radius ,need to transfer to short and long radius
-	static int leftRadius=0;
-    static int rightRadius=0;
+ //    //check current state to all sersor
+ //    int msgID = pdata[0];
+ //    int msgVAL = pdata[1];
+ //    static eFordGuideLineDriState vdtDir = eDIRNOTKNOW;
+ //    static int vdtStatus=0;
+ //    static int iDriveDir = 0;
+ //    static int shortRadius=0;
+ //    static int longRadius=0;
+	// //if CAN send left and right radius ,need to transfer to short and long radius
+	// static int leftRadius=0;
+ //    static int rightRadius=0;
 
-    PDCA_LOG_INFO("onGuideLineRadius :msgID[%d] msgVAL[%d]\n",msgID,msgVAL);
-	switch (msgID)
-	{
-		case /*PDCServiceFord::*/eGUIDELINERADILEFT:
-			leftRadius = msgVAL;
-			m_cVDTLuanchControl |= 0x1;
-			break;
-		case /*PDCServiceFord::*/eGUIDELINERADIRIGHT:
-			rightRadius = msgVAL;
-			m_cVDTLuanchControl |= 0x2;
-			break;
-		case /*PDCServiceFord::*/eGUIDELINEDRVDRI:
-			vdtDir = (eFordGuideLineDriState)msgVAL;
-			if((eFPOSITIVE == vdtDir)||(eFNEGATIVE == vdtDir))
-			{
-				iDriveDir = GraphicVDT::eForward;
-			}
-			else if((eBPOSITIVE == vdtDir)||(eBNEGATIVE == vdtDir))
-			{
-				iDriveDir = GraphicVDT::eRearward;
-			}
-			else
-			{
-				break;
-			}
+ //    PDCA_LOG_INFO("onGuideLineRadius :msgID[%d] msgVAL[%d]\n",msgID,msgVAL);
+	// switch (msgID)
+	// {
+	// 	case /*PDCServiceFord::*/eGUIDELINERADILEFT:
+	// 		leftRadius = msgVAL;
+	// 		m_cVDTLuanchControl |= 0x1;
+	// 		break;
+	// 	case /*PDCServiceFord::*/eGUIDELINERADIRIGHT:
+	// 		rightRadius = msgVAL;
+	// 		m_cVDTLuanchControl |= 0x2;
+	// 		break;
+	// 	case /*PDCServiceFord::*/eGUIDELINEDRVDRI:
+	// 		vdtDir = (eFordGuideLineDriState)msgVAL;
+	// 		if((eFPOSITIVE == vdtDir)||(eFNEGATIVE == vdtDir))
+	// 		{
+	// 			iDriveDir = GraphicVDT::eForward;
+	// 		}
+	// 		else if((eBPOSITIVE == vdtDir)||(eBNEGATIVE == vdtDir))
+	// 		{
+	// 			iDriveDir = GraphicVDT::eRearward;
+	// 		}
+	// 		else
+	// 		{
+	// 			break;
+	// 		}
 
-			if((eFPOSITIVE == vdtDir)||(eBPOSITIVE == vdtDir))
-			{
-				vdtStatus = GraphicVDT::ePositive;
-			}
-			else if((eFNEGATIVE == vdtDir)||(eBNEGATIVE == vdtDir))
-			{
-				vdtStatus = GraphicVDT::eNegative;
-			}
+	// 		if((eFPOSITIVE == vdtDir)||(eBPOSITIVE == vdtDir))
+	// 		{
+	// 			vdtStatus = GraphicVDT::ePositive;
+	// 		}
+	// 		else if((eFNEGATIVE == vdtDir)||(eBNEGATIVE == vdtDir))
+	// 		{
+	// 			vdtStatus = GraphicVDT::eNegative;
+	// 		}
 
-			m_cVDTLuanchControl |= 0x4;
-			break;
-		default:
-			PDCA_LOG_INFO("onGuideLineRadius err :msgID[%d] msgVAL[%d]\n",msgID,msgVAL);
-	}
-    PDCA_LOG_INFO("onGuideLineRadius :m_cVDTLuanchControl[%d]\n",m_cVDTLuanchControl);
-	if(0x7==m_cVDTLuanchControl)
-	{
-		PDCA_LOG_INFO("GuideLine parameter all ready\n");
-		if((eGUIDELINETXT_ON == (eFordGuideLineMsg)s_cLastCMDVal)
-		&&m_PDCSensorHub->bIsActive())
-		{
-			m_pVPAGraphicFord->bSetVDTEnable();
-			PDCA_LOG_INFO("GuideLine launched for parameter ready and VDT was request to show\n");
-		}
-		m_cVDTLuanchControl = 0xF;
-	}
-	else if(0xF == m_cVDTLuanchControl)
-	{
-		;
-	}
-	else
-	{
-		PDCA_LOG_INFO("GuideLine not launched for parameter is not ready [%d]\n",m_cVDTLuanchControl);
-		return;
-	}
+	// 		m_cVDTLuanchControl |= 0x4;
+	// 		break;
+	// 	default:
+	// 		PDCA_LOG_INFO("onGuideLineRadius err :msgID[%d] msgVAL[%d]\n",msgID,msgVAL);
+	// }
+ //    PDCA_LOG_INFO("onGuideLineRadius :m_cVDTLuanchControl[%d]\n",m_cVDTLuanchControl);
+	// if(0x7==m_cVDTLuanchControl)
+	// {
+	// 	PDCA_LOG_INFO("GuideLine parameter all ready\n");
+	// 	if((eGUIDELINETXT_ON == (eFordGuideLineMsg)s_cLastCMDVal)
+	// 	&&m_PDCSensorHub->bIsActive())
+	// 	{
+	// 		m_pVPAGraphicFord->bSetVDTEnable();
+	// 		PDCA_LOG_INFO("GuideLine launched for parameter ready and VDT was request to show\n");
+	// 	}
+	// 	m_cVDTLuanchControl = 0xF;
+	// }
+	// else if(0xF == m_cVDTLuanchControl)
+	// {
+	// 	;
+	// }
+	// else
+	// {
+	// 	PDCA_LOG_INFO("GuideLine not launched for parameter is not ready [%d]\n",m_cVDTLuanchControl);
+	// 	return;
+	// }
 
-	//transfer left/right Radius to short/long Radius
-	if((eFNEGATIVE == vdtDir)||(eBNEGATIVE == vdtDir))
-	{
-	    if(leftRadius>=rightRadius)
-	    {
-			PDCA_LOG_INFO("onGuideLineRadius err :leftR[%d] shall be shorter than rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
-			longRadius = leftRadius;
-			shortRadius= rightRadius;
-		}
-		else
-		{
-			//PDCA_LOG_INFO("onGuideLineRadius  :leftR[%d]rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
-			longRadius = rightRadius;
-			shortRadius= leftRadius;
-		}
-	}
-	else if((eFPOSITIVE == vdtDir)||(eBPOSITIVE == vdtDir))
-	{
-	    if(rightRadius>=leftRadius)
-	    {
-			PDCA_LOG_INFO("onGuideLineRadius err :rightR[%d] shall be shorter than leftR[%d] on dir[%d] \n",rightRadius,leftRadius,vdtDir);
-			longRadius = rightRadius;
-			shortRadius= leftRadius;
-		}
-		else
-		{
-			//PDCA_LOG_INFO("onGuideLineRadius  :leftR[%d]rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
-			longRadius = leftRadius;
-			shortRadius= rightRadius;
-		}
+	// //transfer left/right Radius to short/long Radius
+	// if((eFNEGATIVE == vdtDir)||(eBNEGATIVE == vdtDir))
+	// {
+	//     if(leftRadius>=rightRadius)
+	//     {
+	// 		PDCA_LOG_INFO("onGuideLineRadius err :leftR[%d] shall be shorter than rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
+	// 		longRadius = leftRadius;
+	// 		shortRadius= rightRadius;
+	// 	}
+	// 	else
+	// 	{
+	// 		//PDCA_LOG_INFO("onGuideLineRadius  :leftR[%d]rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
+	// 		longRadius = rightRadius;
+	// 		shortRadius= leftRadius;
+	// 	}
+	// }
+	// else if((eFPOSITIVE == vdtDir)||(eBPOSITIVE == vdtDir))
+	// {
+	//     if(rightRadius>=leftRadius)
+	//     {
+	// 		PDCA_LOG_INFO("onGuideLineRadius err :rightR[%d] shall be shorter than leftR[%d] on dir[%d] \n",rightRadius,leftRadius,vdtDir);
+	// 		longRadius = rightRadius;
+	// 		shortRadius= leftRadius;
+	// 	}
+	// 	else
+	// 	{
+	// 		//PDCA_LOG_INFO("onGuideLineRadius  :leftR[%d]rightR[%d] on dir[%d] \n",leftRadius,rightRadius,vdtDir);
+	// 		longRadius = leftRadius;
+	// 		shortRadius= rightRadius;
+	// 	}
 
-	}
-	else
-	{
-		PDCA_LOG_INFO("onGuideLineRadius left[%d] right[%d]on dir[%d]\n",leftRadius,rightRadius,vdtDir);
-	}
-	PDCA_LOG_INFO("onGuideLineRadius  :shortRadius[%d]longRadius[%d] on dir[%d] \n",shortRadius,longRadius,vdtDir);
-    if((shortRadius==0)&&(longRadius==0))
-	{
-		PDCA_LOG_INFO("onGuideLineRadius left[0] right[0]\n");
-	}
+	// }
+	// else
+	// {
+	// 	PDCA_LOG_INFO("onGuideLineRadius left[%d] right[%d]on dir[%d]\n",leftRadius,rightRadius,vdtDir);
+	// }
+	// PDCA_LOG_INFO("onGuideLineRadius  :shortRadius[%d]longRadius[%d] on dir[%d] \n",shortRadius,longRadius,vdtDir);
+ //    if((shortRadius==0)&&(longRadius==0))
+	// {
+	// 	PDCA_LOG_INFO("onGuideLineRadius left[0] right[0]\n");
+	// }
 
-	printf("	 [%s, %d] VDTState is ===%d, %d, %d, %d===\n", __FUNCTION__, __LINE__, shortRadius);
-	m_pVPAGraphicFord->bSetVDTState(iDriveDir,vdtStatus,shortRadius,longRadius);
+	// printf("	 [%s, %d] VDTState is ===%d, %d, %d, %d===\n", __FUNCTION__, __LINE__, shortRadius);
+	// m_pVPAGraphicFord->bSetVDTState(iDriveDir,vdtStatus,shortRadius,longRadius);
 }
 
 //---------------------------------PDCServiceFord msg handler--------------------------------------------------
