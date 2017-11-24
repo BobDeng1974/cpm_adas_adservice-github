@@ -16,11 +16,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
 
 include_directories(src-gen/provides)
-#include_directories(./provides)
+include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)
-#include_directories(./consumes)
+include_directories(./consumes)
 include_directories(${CMAKE_SYSROOT}/usr/include)
-include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic/GuideLine)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib)
 link_directories(${CMAKE_SYSROOT}/lib)
@@ -47,11 +46,11 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/gen)
 add_subdirectory(gen)
 endif()
 
-#if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
-#add_subdirectory(src-gen)
-#endif()
+if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
+add_subdirectory(src-gen)
+endif()
 
-#set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
+set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
 
 #Generate command
 add_custom_target(
@@ -63,7 +62,7 @@ DEPENDS cleanall
 add_custom_target(
 compile
 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-DEPENDS adastest
+DEPENDS adas-dbus  adas_adas_types_static_stub
 )
 
 #Generate and compile
@@ -103,6 +102,7 @@ include_directories(${PROJECT_SOURCE_DIR}/../../include/Pas)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAFoundation)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic)
+include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic/GuideLine)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/CaseClient)
 
 link_directories(${CMAKE_SYSROOT}/usr/lib/adas)
