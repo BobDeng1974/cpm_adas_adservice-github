@@ -86,6 +86,6 @@ target_link_libraries(
 adas
 adas_adas_types_static_stub
 AFoundation ABase ACaseSocket AGraphic dlt
-wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application nanomsg ilmCommon ilmClient ilmControl nanomsg
+wayland-client wayland-egl wayland-cursor GLESv2 EGL ivi-application nanomsg
 -Wl,--no-undefined,--as-needed CommonAPI
 rt)

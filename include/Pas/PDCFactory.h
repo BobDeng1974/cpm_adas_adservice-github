@@ -4,7 +4,7 @@
 
 //#include "VPAServiceStubImpl.hpp"
 //#include "PDCServiceProxy.h"
-#include "PDCServiceFord.h"
+//#include "PDCServiceFord.h"
 //using namespace v0::com::harman::ParkAssist;
 //using namespace v1::com::harman::ParkAssist;
 
@@ -18,7 +18,7 @@ class PDCFactory {
 public:
     static PDCFactory* getInstance();
     static void 				delInstance();
-    PDCServiceFord* vSetup();
+    void* vSetup();
     virtual ~PDCFactory();
 private:
     PDCFactory();

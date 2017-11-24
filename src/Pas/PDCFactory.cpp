@@ -1,14 +1,16 @@
 
-#include "Pas/PDCMsgHandlerFord.h"
+//#include "Pas/PDCMsgHandlerFord.h"
 //#include "VPAServiceStubImpl.hpp"
 //#include "PDCServiceProxy.h"
-#include "Pas/PDCServiceFord.h"
+//#include "Pas/PDCServiceFord.h"
 #include "Pas/PDCFactory.h"
-#include "Pas/PDCGraphicFord.h"
+//#include "Pas/PDCGraphicFord.h"
 #include "CMessageQueue.h"
 //concreate lib provide by graphic
 #include "ADASManager/PAS/GraphicCore/GraphicVPAFord.h"
-#include "Pas/FordPDCTest.h"
+//#include "Pas/FordPDCTest.h"
+
+using Harman::Adas::AFramework::ABase::ADASManager::GraphicVPAFord;
 
 namespace Harman {
 namespace Adas {
@@ -49,14 +51,14 @@ PDCFactory::PDCFactory()
 {
 	PDCA_LOG_INFO("PDCFactory() !!!!!\n");
 }
-PDCServiceFord* PDCFactory::vSetup()
+void* PDCFactory::vSetup()
 {
 	printf(" [%s, %d]\n", __FUNCTION__, __LINE__);
     printf(" [%s, %d]\n", __FUNCTION__, __LINE__);
-	CMessageQueue* pMsgQueue =NULL;
-#ifndef PRESCORE_SUPPORT
-    pMsgQueue = new CMessageQueue("FordPDCQueue", 300, new PDCMsgHandlerFord());
-#endif
+// 	CMessageQueue* pMsgQueue =NULL;
+// #ifndef PRESCORE_SUPPORT
+//     pMsgQueue = new CMessageQueue("FordPDCQueue", 300, new PDCMsgHandlerFord());
+// #endif
     //create ford graphic proecess client
     GraphicVPAFord* pGraphicVPAFord =new GraphicVPAFord();
     if(pGraphicVPAFord->vInit(640,720))

@@ -1,10 +1,10 @@
 
 #include "PasServiceStubImplGWM.h"
 #include "Pas/PDCFactory.h"
-#include "Pas/PDCServiceFord.h"
+//#include "Pas/PDCServiceFord.h"
 
 using Harman::Adas::AProject::GWMV2MH::Pas::PDCFactory;
-using Harman::Adas::AProject::GWMV2MH::Pas::PDCServiceFord;
+//using Harman::Adas::AProject::GWMV2MH::Pas::PDCServiceFord;
 
 namespace Harman {
 namespace Adas {
@@ -26,7 +26,7 @@ PasServiceStubImplGWM* PasServiceStubImplGWM::getInstance()
 PasServiceStubImplGWM::PasServiceStubImplGWM()
 {
     PDCFactory *pTest = PDCFactory::getInstance();
-    PDCServiceFord *m_PDCServiceFord = pTest->vSetup();
+    void *m_PDCServiceFord = pTest->vSetup();
 
     //---------------------------------------
     //m_PDCServiceFord->pushPDCMsg();
