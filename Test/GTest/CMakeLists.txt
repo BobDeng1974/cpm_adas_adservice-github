@@ -14,10 +14,11 @@ cmake_policy(SET CMP0015 NEW)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
-include_directories(.)
 
-include_directories(../../src-gen/provides)
+include_directories(src-gen/provides)
+#include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)
+#include_directories(./consumes)
 include_directories(${CMAKE_SYSROOT}/usr/include)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAGraphic/GuideLine)
 
@@ -42,16 +43,15 @@ if("${ELINA_LITE_DCIF_GENERATOR}" STREQUAL "")
    set(ELINA_LITE_DCIF_GENERATOR $ENV{ELINA_LITE_DCIF_GENERATOR})
 endif()
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/../../gen)
-add_subdirectory(${CMAKE_SOURCE_DIR}/../../gen)
+if(EXISTS ${CMAKE_SOURCE_DIR}/gen)
+add_subdirectory(gen)
 endif()
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/../../src-gen)
-add_subdirectory(${CMAKE_SOURCE_DIR}/../../src-gen)
-endif()
-add_subdirectory(${CMAKE_SOURCE_DIR}/../../src)
+#if(EXISTS ${CMAKE_SOURCE_DIR}/src-gen)
+#add_subdirectory(src-gen)
+#endif()
 
-set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
+#set(GEN_COMMAND ${ELINA_LITE_DCIF_GENERATOR} -application com.harman.dcif.codegen.cli.codeGenApplication -noSplash -src ${CDEPL_PATH} -dest ${OUTPUT_DIR})
 
 #Generate command
 add_custom_target(
@@ -92,7 +92,7 @@ ${COMMONAPI_LIBDIR}
 LINK_DIRECTORIES(${src-gen})
 add_definitions(-DLINUX_OS)
 
-
+include_directories(${PROJECT_SOURCE_DIR}/../../src/provides/)
 include_directories(${PROJECT_SOURCE_DIR}/../../include)
 include_directories(${PROJECT_SOURCE_DIR}/../../include/Rvc)
 include_directories(${PROJECT_SOURCE_DIR}/../../include/Camera)
@@ -122,10 +122,10 @@ AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/../../src/Pas PAS_SRC)
 add_executable(
 adastest
 ${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}  ${AVM_SRC} ${PAS_SRC}
-${PROJECT_SOURCE_DIR}/../../src-gen/provides
-${PROJECT_SOURCE_DIR}/../../gen/dbus/provides
-${PROJECT_SOURCE_DIR}/../../src-gen/provides
-${PROJECT_SOURCE_DIR}/../../gen/dbus/provides
+src-gen/provides
+gen/dbus/provides
+src-gen/provides
+gen/dbus/provides
 ${PROJECT_SOURCE_DIR}/../../src/provides/v0/com/harman/adas/AdasServiceStubImpl.cpp
 ${PROJECT_SOURCE_DIR}/../../src/provides/v0/com/harman/adas/PASServiceStubImpl.cpp
 ${PROJECT_SOURCE_DIR}/../../src/provides/v0/com/harman/adas/RvcServiceStubImpl.cpp
