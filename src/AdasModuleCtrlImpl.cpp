@@ -3,6 +3,8 @@
 #include "Rvc/RvcMsgQDefine.h"
 #include "Avm/AvmStubImpl.h"
 #include "Avm/AvmMsgQDefine.h"
+#include "Apa/ApaStubImpl.h"
+#include "Apa/ApaMsgQDefine.h"
 
 #include "ADASManager/Camera/CameraHub.h"
 #include "Camera/CameraHubGWMv2.h"
@@ -61,6 +63,11 @@ a_status AdasModuleCtrlImpl::CreateModules(string moduleTab[], BYTE cameraFlag)
             ALOGI("CreateModules [%s]\n", moduleTab[index].c_str());
 
         }		
+        else if(moduleTab[index] == ADAS_MODULE_APA)
+        {
+            m_mModuleMap.insert(makePair((UInt32)eModuleType_APA, static_cast<ModuleBase*>(new ApaStubImpl())));
+            ALOGI("CreateModules [%s]\n", moduleTab[index].c_str());
+        }
         #if 0
         else if(moduleTab[index] == ADAS_MODULE_SVC)
         {
@@ -71,10 +78,6 @@ a_status AdasModuleCtrlImpl::CreateModules(string moduleTab[], BYTE cameraFlag)
 
         }
         else if(moduleTab[index] == ADAS_MODULE_PAS)
-        {
-
-        }
-        else if(moduleTab[index] == ADAS_MODULE_APA)
         {
 
         }
