@@ -3,26 +3,13 @@
 
 #define  ADAS_MODULE_APA    string("APA")
 
-/*enum eRVCEvent
+enum eAPAEvent
 {
-    eCameraActivate_ON,
-    eCameraActivate_OFF,
-    eShowGuideLine_ON,
-    eShowGuideLine_OFF,
-    eManualActivateReverseCamera_ON,
-    eManualActivateReverseCamera_OFF,
-    eActiveSettingMode_ON,
-    eActiveSettingMode_OFF,
-    eSetPositionAndSize,
-
-    eGetCameraState,
-    eGetCameraConfig,
-
-    eOtherEvent_ReverseCam1TimerDeactivate,
-    eOtherEvent_ReverseCam2TimerDeactivate
+    eAPA_ACTIVE,
+    eAPA_DEACTIVE,
 };
 
-enum eDiagnosticRVCEvent
+/*enum eDiagnosticRVCEvent
 {
     eDiag_Start,
     eDiag_Stop,

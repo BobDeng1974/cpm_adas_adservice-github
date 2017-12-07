@@ -94,6 +94,8 @@ BOOLEAN CAdasManagerGWMv2::initialize(string sServiceName)
     AdasModuleCtrlImpl::getInstance()->CreateModules(moduleTab, cameraFlag);
 
     AdasModuleCtrlImpl::getInstance()->ModuleInit();
+
+	AdasModuleCtrlImpl::getInstance()->InitializeAMBProxy();
     return TRUE;
 }
 

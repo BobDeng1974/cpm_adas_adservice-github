@@ -12,6 +12,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
 include_directories(./src)
 
+include_directories(./../src-gen/consumes)
 include_directories(./../src-gen/provides)
 include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)

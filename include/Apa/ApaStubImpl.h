@@ -22,7 +22,8 @@ public:
 public:
 	a_status initialize();
 	VOID afterHandleMessageQueue();
-	//VOID showCamera(const string& pData);
+	VOID  activeAPA(const string& pData);
+	VOID  deactiveAPA(const string& pData);
 
 private:
 		

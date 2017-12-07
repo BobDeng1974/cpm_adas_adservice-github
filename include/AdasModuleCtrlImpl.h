@@ -1,8 +1,14 @@
 #ifndef ADAS_MODULE_CTRL_IMPL_H_
 #define ADAS_MODULE_CTRL_IMPL_H_
 
+#include "v0/com/harman/amb/adas.hpp"
+#include "v0/com/harman/amb/adasProxy.hpp"
+
+
 #include "ADASManager/AdasModuleCtrl.h"
 #include "TraceMacros.h"
+
+#include "CAMBConsumerHandler.hpp"
 
 using namespace Harman::Adas::AFramework::AFoundation;
 
@@ -35,6 +41,9 @@ public:
 
     a_status CreateModules(string moduleTab[], BYTE cameraFlag);
     a_status ModuleInit();
+    a_status InitializeAMBProxy();
+	a_status SubScribeToADASEvents();
+	void ADASProxyAvilabilityCB(CommonAPI::AvailabilityStatus status);
 
 protected:
     AdasModuleCtrlImpl();
@@ -42,6 +51,11 @@ protected:
 private:
 
     static AdasModuleCtrlImpl* m_pInstance;
+
+private:
+    //std::shared_ptr<CommonAPI::Runtime> runtime;
+    std::shared_ptr<v0::com::harman::amb::adasProxy<>> mAMBProxy;
+    AMBConsumerHandler mAMBConsumerHandler;
 };
 
 }//GWMV2MH
