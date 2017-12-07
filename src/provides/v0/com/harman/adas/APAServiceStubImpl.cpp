@@ -20,7 +20,7 @@ APAServiceStubImpl::~APAServiceStubImpl()
 
 }
 
-void APAServiceStubImpl::SwitchAPAView(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::com::harman::adas::APABaseType::enAPAViewStatus m_eAPAViewStatus, SwitchAPAViewReply_t reply)
+void APAServiceStubImpl::SwitchAPAView(const std::shared_ptr<CommonAPI::ClientId> _client, ::v1::com::harman::adas::APABaseType::enAPAViewStatus m_eAPAViewStatus, SwitchAPAViewReply_t reply)
 {
 	// TODO: Implement me
 }

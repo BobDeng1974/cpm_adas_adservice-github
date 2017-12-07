@@ -18,7 +18,7 @@ public:
 	static ApaServiceStubImplGWM* getInstance();
 	virtual ~ApaServiceStubImplGWM();
 	virtual void SwitchAPAView(const std::shared_ptr<CommonAPI::ClientId> _client,
-		::v0::com::harman::adas::APABaseType::enAPAViewStatus m_eAPAViewStatus,
+		::v1::com::harman::adas::APABaseType::enAPAViewStatus m_eAPAViewStatus,
 		SwitchAPAViewReply_t) override;
 
 private:

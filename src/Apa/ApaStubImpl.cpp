@@ -1,7 +1,7 @@
 #include "Apa/ApaStubImpl.h"
 #include "Apa/ApaMsgQDefine.h"
 #include "ApaServiceStubImplGWM.h"
-#include "v0/com/harman/adas/APABaseType.hpp"
+#include "v1/com/harman/adas/APABaseType.hpp"
 
 namespace Harman {
 namespace Adas {
@@ -37,13 +37,13 @@ VOID  ApaStubImpl::afterHandleMessageQueue()
 VOID  ApaStubImpl::activeAPA(const string& pData)
 {
     ALOGD("activeAPA [%s]\n", pData.c_str());
-	ApaServiceStubImplGWM::getInstance()->setAPAStatusAttribute(::v0::com::harman::adas::APABaseType::enAPAStatus::e_APA_ACTIVE);
+	ApaServiceStubImplGWM::getInstance()->setAPAStatusAttribute(::v1::com::harman::adas::APABaseType::enAPAStatus::e_APA_ACTIVE);
 }
 
 VOID  ApaStubImpl::deactiveAPA(const string& pData)
 {
     ALOGD("deactiveAPA [%s]\n", pData.c_str());
-	ApaServiceStubImplGWM::getInstance()->setAPAStatusAttribute(::v0::com::harman::adas::APABaseType::enAPAStatus::e_APA_DEACTIVE);
+	ApaServiceStubImplGWM::getInstance()->setAPAStatusAttribute(::v1::com::harman::adas::APABaseType::enAPAStatus::e_APA_DEACTIVE);
 }
 }
 }
