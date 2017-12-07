@@ -48,3 +48,4 @@ VOID  ApaStubImpl::deactiveAPA(const string& pData)
 }
 }
 }
+}

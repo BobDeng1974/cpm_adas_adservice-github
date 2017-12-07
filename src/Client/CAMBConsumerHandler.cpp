@@ -60,7 +60,7 @@ void AMBConsumerHandler::CB_getFPAS_WorkSts_emAttribute(adas_types::FPAS_WorkSts
 		CAdasManagerGWMv2::getInstance()->pushMessage(new MessageForQueue(
 			AdasModuleCtrlImpl::eModuleType_APA,
 			eAPA_ACTIVE,
-			"111"));
+			"APA active"));
 	}
 	else if(adas_types::FPAS_WorkSts_em::EM_Failed == value)
 	{
@@ -68,7 +68,7 @@ void AMBConsumerHandler::CB_getFPAS_WorkSts_emAttribute(adas_types::FPAS_WorkSts
 		CAdasManagerGWMv2::getInstance()->pushMessage(new MessageForQueue(
 			AdasModuleCtrlImpl::eModuleType_APA,
 			eAPA_DEACTIVE,
-			"222"));
+			"APA deactive"));
 	}
 
 }
