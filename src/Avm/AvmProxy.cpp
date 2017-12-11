@@ -6,6 +6,8 @@ namespace Harman {
 namespace Adas {
 namespace AProject {
 namespace GWMV2MH {
+//namespace AVM {
+
 
 CAvmProxy* CAvmProxy:: m_pAvmInstance = NULL;
 
@@ -32,7 +34,6 @@ CAvmProxy* CAvmProxy::getInstance()
 
 a_status  CAvmProxy::initialize()
 {
-//    ALOGD("CAvmProxy::initialize\n");
     ALOGI("CAvmProxy::initialize\n");
 
     return a_status(0); 
@@ -43,53 +44,53 @@ void CAvmProxy::SwitchAVMView(const std::shared_ptr<CommonAPI::ClientId> _client
 	 ALOGI("SwitchAVMView start m_eAVMViewMode is %d\n",(Int32)m_eAVMViewMode);
 	switch (m_eAVMViewMode)
 	{
-		case 0 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_OFF:
 			ALOGI("SwitchAVMView going to set off \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("OFF")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_AVM_OFF));
 			break;
-		case 1 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_TOP_VIEW:
 			ALOGI("SwitchAVMView going to top view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("TOP_VIEW")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_TOP_VIEW));
 			break;
-		case 2 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_FRONT_VIEW:
 			ALOGI("SwitchAVMView going to front view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("FRONT_VIEW")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D1_VIEW));
 			break;			
-		case 3 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_REAR_VIEW:
 			ALOGI("SwitchAVMView going to rear view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("REAR_VIEW")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D8_VIEW));
 			break;			
-		case 4 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_RIGHT_VIEW:
 			ALOGI("SwitchAVMView going to right view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("RIGHT_VIEW")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D5_VIEW));
 			break;			
-		case 5 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_LEFT_VIEW:
 			ALOGI("SwitchAVMView going to left view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("LEFT_VIEW")));			
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D4_VIEW));			
 			break;						
-		case 6 :
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_FRONT_RIGHT_VIEW:
 			ALOGI("SwitchAVMView going to front right view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("FRONT_RIGHT_VIEW")));
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D3_VIEW));
 			break;			
-		case 7 :
-			ALOGI("SwitchAVMView going to front rear left view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("REAR_LEFT_VIEW")));
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_FRONT_LEFT_VIEW:
+			ALOGI("SwitchAVMView going to front left view \n");
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D2_VIEW));
 			break;
-		case 8 :
-			ALOGI("SwitchAVMView going to front rear right view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("REAR_RIGHT_VIEW")));
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_REAR_RIGHT_VIEW:
+			ALOGI("SwitchAVMView going to rear right view \n");
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D7_VIEW));
 			break;			
-		case 9 :
-			ALOGI("SwitchAVMView going to front front left view \n");			
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("FRONT_LEFT_VIEW")));
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_REAR_LEFT_VIEW:
+			ALOGI("SwitchAVMView going to rear left view \n");			
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_D6_VIEW));
 			break;
-		case 10 :
-			ALOGI("SwitchAVMView going to front top rear view \n");	
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("TOP_REAR_VIEW")));
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_TOP_REAR_VIEW:
+			ALOGI("SwitchAVMView going to top rear view \n");	
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_REAR_WIDE_ANGLE_VIEW));
 			break;			
-		case 11 :
-			ALOGI("SwitchAVMView going to front top front view \n");
-			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(2,eAvm_SWITCH, string("TOP_FRONT_VIEW")));
+		case ::v0::com::harman::adas::AVMBaseType::enAVMViewMode::e_SET_TOP_FRONT_VIEW:
+			ALOGI("SwitchAVMView going to top front view \n");
+			m_pCAdasManagerGWMv2->pushMessage(new MessageForQueue(AdasModuleCtrlImpl::eModuleType_AVM,eAvm_SWITCH, MANUAL_ACTIVATE_FRONT_WIDE_ANGLE_VIEW));
 			break;			
 		default:
 		    ALOGI("SwitchAVMView error AVM View mode is %d\n",(Int32)m_eAVMViewMode);
@@ -119,7 +120,10 @@ void CAvmProxy::SwitchAutoCalibrationManually(const std::shared_ptr<CommonAPI::C
 
 }
 
-}
-}
-}
-}
+
+
+//} // namespace AVM
+} // namespace GWMV2MH
+} // namespace AProject
+} // namespace Adas
+} // namespace Harman

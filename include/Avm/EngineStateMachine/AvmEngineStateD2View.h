@@ -1,5 +1,5 @@
-#ifndef __HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_DEFAULT_STATE_H__
-#define __HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_DEFAULT_STATE_H__
+#ifndef __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_D2_VIEW_H__
+#define __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_D2_VIEW_H__
 
 #include "State.h"
 #include "StateMachine.h"
@@ -13,29 +13,39 @@ using namespace Harman::Adas::AFramework::AFoundation;
 
 namespace Harman {
 namespace Adas {
-namespace AFramework {
-namespace ABase {
-namespace ADASManager {
+namespace AProject {
+namespace GWMV2MH {
+namespace AVM {
 
-class CAvmDefaultState : public State
+class CAvmEngineStateD2View : public State
 {
 public:
-    CAvmDefaultState(const string& name, StateMachine* sm)
+    CAvmEngineStateD2View(const string& name, StateMachine* sm)
         : State(name, sm)
-    {}
+    {
+    
+    }
 
     VOID Enter() const;
     VOID Exit() const;
 
     virtual BOOLEAN ProcessMessage(UInt32 uiType, UInt32 uiID, const string& pData) const;
 
-    ~CAvmDefaultState();
+    ~CAvmEngineStateD2View()
+    {
+
+    }
+
+private:
+
 };
 
-} // namespace ADASManager
-} // namespace ABase
-} // namespace AFramework
+} // namespace AVM
+} // namespace GWMV2MH
+} // namespace AProject
 } // namespace Adas
 } // namespace Harman
 
-#endif //__HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_DEFAULT_STATE_H__
+
+#endif //__HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_D2_VIEW_H__
+
