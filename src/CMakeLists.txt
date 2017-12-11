@@ -12,6 +12,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(ALIBROOTDIR "${PROJECT_SOURCE_DIR}")
 include_directories(./src)
 
+include_directories(./../src-gen/consumes)
 include_directories(./../src-gen/provides)
 include_directories(./provides)
 include_directories(${CMAKE_SYSROOT}/usr/include/CommonAPI-3.1)
@@ -51,6 +52,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include/Camera)
 include_directories(${PROJECT_SOURCE_DIR}/include/Client)
 include_directories(${PROJECT_SOURCE_DIR}/include/Avm)
 include_directories(${PROJECT_SOURCE_DIR}/include/Pas)
+include_directories(${PROJECT_SOURCE_DIR}/include/Apa)
 
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libAFoundation)
 include_directories(${CMAKE_SYSROOT}/usr/include/adas/libABase)
@@ -70,10 +72,11 @@ AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Rvc RVC_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Client CLIENT_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Avm AVM_SRC)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Pas PAS_SRC)
+AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src/Apa APA_SRC)
 
 add_executable(
 adas
-${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}  ${AVM_SRC} ${PAS_SRC}
+${MAIN_SRC} ${CAM_SRC} ${RVC_SRC} ${CLIENT_SRC}  ${AVM_SRC} ${PAS_SRC} ${APA_SRC}
 
 provides/v0/com/harman/adas/AdasServiceStubImpl.cpp
 provides/v0/com/harman/adas/PASServiceStubImpl.cpp

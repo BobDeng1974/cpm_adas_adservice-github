@@ -14,6 +14,7 @@
 #include "provides/v0/com/harman/adas/APAServiceStubImpl.hpp"
 #include "RvcServiceStubImplGWM.h"
 #include "PasServiceStubImplGWM.h"
+#include "ApaServiceStubImplGWM.h"
 #include "AvmProxy.h"
 
 #include <iostream>
@@ -68,7 +69,8 @@ int main(int argc, char **argv) {
 
     std::string APAServiceInst0_prov_connection = "adas";
     std::string APAServiceInst0_prov_instance = "adas.APAServiceInst0";
-    std::shared_ptr<v0::com::harman::adas::APAServiceStubImpl> APAServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::APAServiceStubImpl>();
+    //std::shared_ptr<v0::com::harman::adas::APAServiceStubImpl> APAServiceInst0_prov_svc = std::make_shared<v0::com::harman::adas::APAServiceStubImpl>();
+    std::shared_ptr<v0::com::harman::adas::APAServiceStubImpl> APAServiceInst0_prov_svc(ApaServiceStubImplGWM::getInstance());
     runtime->registerService(domain, APAServiceInst0_prov_instance, APAServiceInst0_prov_svc, APAServiceInst0_prov_connection);
 
     CAdasManagerGWMv2::getInstance()->start();

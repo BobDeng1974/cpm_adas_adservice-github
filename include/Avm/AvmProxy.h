@@ -4,7 +4,7 @@
 #include "CAdasManagerGWMv2.h"
 #include "AdasModuleCtrlImpl.h"
 #include "AvmMsgQDefine.h"
-#include "AVMServiceStubImpl.hpp"
+#include "v0/com/harman/adas/AVMServiceStubImpl.hpp"
 
 
 #if 0
