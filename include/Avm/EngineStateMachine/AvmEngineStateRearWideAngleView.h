@@ -1,11 +1,9 @@
-#ifndef __HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_ON_STATE_H__
-#define __HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_ON_STATE_H__
+#ifndef __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_REAR_WIDE_ANGLE_VIEW_H__
+#define __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_REAR_WIDE_ANGLE_VIEW_H__
 
 #include "State.h"
 #include "StateMachine.h"
 #include "AvmEventDefine.h"
-
-//#include <signal.h>
 
 using namespace std;
 
@@ -15,14 +13,14 @@ using namespace Harman::Adas::AFramework::AFoundation;
 
 namespace Harman {
 namespace Adas {
-namespace AFramework {
-namespace ABase {
-namespace ADASManager {
+namespace AProject {
+namespace GWMV2MH {
+namespace AVM {
 
-class CAvmOnState : public State
+class CAvmEngineStateRearWideAngleView : public State
 {
 public:
-    CAvmOnState(const string& name, StateMachine* sm)
+    CAvmEngineStateRearWideAngleView(const string& name, StateMachine* sm)
         : State(name, sm)
     {
     
@@ -33,7 +31,7 @@ public:
 
     virtual BOOLEAN ProcessMessage(UInt32 uiType, UInt32 uiID, const string& pData) const;
 
-    ~CAvmOnState()
+    ~CAvmEngineStateRearWideAngleView()
     {
 
     }
@@ -42,10 +40,11 @@ private:
 
 };
 
-} // namespace ADASManager
-} // namespace ABase
-} // namespace AFramework
+} // namespace AVM
+} // namespace GWMV2MH
+} // namespace AProject
 } // namespace Adas
 } // namespace Harman
 
-#endif //__HARMAN_ADAS_AFRAMEWORK_ABASE_ADASMANAGER_AVM_ON_STATE_H__
+
+#endif //__HARMAN_ADAS_APROJECT_GWMV2MH_AVM_ENGINE_STATE_REAR_WIDE_ANGLE_VIEW_H__

@@ -1,19 +1,12 @@
-#ifndef AVM_STUB_IMPL_H_
-#define AVM_STUB_IMPL_H_
+#ifndef __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_PROXY_H_
+#define __HARMAN_ADAS_APROJECT_GWMV2MH_AVM_PROXY_H_
 
 #include "CAdasManagerGWMv2.h"
 #include "AdasModuleCtrlImpl.h"
 #include "AvmMsgQDefine.h"
-#include "v0/com/harman/adas/AVMServiceStubImpl.hpp"
+#include "AvmTyepDefine.h"
+#include "AVMServiceStubImpl.hpp"
 
-
-#if 0
-using namespace std;
-using namespace v0;
-using namespace com;
-using namespace harman;
-using namespace adas;
-#endif
 
 using namespace std;
 using namespace v0::com::harman::adas;
@@ -22,11 +15,13 @@ namespace Harman {
 namespace Adas {
 namespace AProject {
 namespace GWMV2MH {
+//namespace AVM {
+
 
 class CAvmProxy : public AVMServiceStubImpl
 {
 public:
-//	CAvmProxy();
+
 	static CAvmProxy* getInstance();
 	virtual ~CAvmProxy();
 
@@ -47,15 +42,15 @@ private:
 private:
 	
 	static CAvmProxy* m_pAvmInstance;
-	CAdasManagerGWMv2* m_pCAdasManagerGWMv2;		
+	CAdasManagerGWMv2* m_pCAdasManagerGWMv2;
 };
 
-}
-}
-}
-}
+//} // namespace AVM
+} // namespace GWMV2MH
+} // namespace AProject
+} // namespace Adas
+} // namespace Harman
 
 
 
-
-#endif
+#endif //__HARMAN_ADAS_APROJECT_GWMV2MH_AVM_PROXY_H_
