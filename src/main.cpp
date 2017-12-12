@@ -18,6 +18,7 @@
 #include "AvmProxy.h"
 
 #include <iostream>
+#include <random>
 #include <memory>
 #include <unistd.h>
 #include "CAdasManagerGWMv2.h"
@@ -28,7 +29,36 @@
 using namespace std;
 using namespace Harman::Adas::AProject::GWMV2MH;
 
-int main(int argc, char **argv) {
+void TestPasFun()
+{
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    std::cout << "TEST PAS : begine" << std::endl;
+
+    std::default_random_engine random(time(NULL));
+    std::uniform_int_distribution<unsigned int> disArea(1, 8);
+    std::uniform_int_distribution<unsigned int> disDegree(1, 15);
+
+    while (true) {
+        switch(disArea(random)) {
+            case 1 : PasServiceStubImplGWM::GetInstance()->TestFrontLeftInside(disDegree(random)); break;
+            case 2 : PasServiceStubImplGWM::GetInstance()->TestFrontLeft(disDegree(random)); break;
+            case 3 : PasServiceStubImplGWM::GetInstance()->TestFrontRightInside(disDegree(random)); break;
+            case 4 : PasServiceStubImplGWM::GetInstance()->TestFrontRight(disDegree(random)); break;
+
+            case 5 : PasServiceStubImplGWM::GetInstance()->TestRearLeftInside(disDegree(random)); break;
+            case 6 : PasServiceStubImplGWM::GetInstance()->TestRearLeft(disDegree(random)); break;
+            case 7 : PasServiceStubImplGWM::GetInstance()->TestRearRightInside(disDegree(random)); break;
+            case 8 : PasServiceStubImplGWM::GetInstance()->TestRearRight(disDegree(random)); break;
+            default : std::cout << "TEST PAS : error area !!!" << std::endl;
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+int main(int argc, char **argv)
+{
     #ifdef DLTLOG
         PRINTINIT;
     #endif
@@ -64,7 +94,7 @@ int main(int argc, char **argv) {
 
     std::string PASServiceInst0_prov_connection = "adas";
     std::string PASServiceInst0_prov_instance = "adas.PASServiceInst0";
-    std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc(PasServiceStubImplGWM::getInstance());
+    std::shared_ptr<v0::com::harman::adas::PASServiceStubImpl> PASServiceInst0_prov_svc(PasServiceStubImplGWM::GetInstance());
     runtime->registerService(domain, PASServiceInst0_prov_instance, PASServiceInst0_prov_svc, PASServiceInst0_prov_connection);
 
     std::string APAServiceInst0_prov_connection = "adas";
@@ -76,6 +106,8 @@ int main(int argc, char **argv) {
     CAdasManagerGWMv2::getInstance()->start();
 
     ReverseSignalReceive* receiver = new ReverseSignalReceive();
+
+    thread TestPASThread = thread{TestPasFun};
 
     while (true) {
         std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
