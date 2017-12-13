@@ -5,7 +5,7 @@
 #include "AdasModuleCtrlImpl.h"
 #include "AvmMsgQDefine.h"
 #include "AvmTyepDefine.h"
-#include "AVMServiceStubImpl.hpp"
+#include "v0/com/harman/adas/AVMServiceStubImpl.hpp"
 
 
 using namespace std;
@@ -26,7 +26,7 @@ public:
 	virtual ~CAvmProxy();
 
 	a_status initialize();
-	
+
 	void SwitchAVMView(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::com::harman::adas::AVMBaseType::enAVMViewMode m_eAVMViewMode, SwitchAVMViewReply_t reply);
 
 	void SwitchGuideline(const std::shared_ptr<CommonAPI::ClientId> _client, ::v0::com::harman::adas::AVMBaseType::enAVMGuideLineMode m_eAVMGuideLinewMode, SwitchGuidelineReply_t reply);
@@ -40,7 +40,7 @@ public:
 private:
 	CAvmProxy();
 private:
-	
+
 	static CAvmProxy* m_pAvmInstance;
 	CAdasManagerGWMv2* m_pCAdasManagerGWMv2;
 };

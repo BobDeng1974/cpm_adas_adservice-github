@@ -3,9 +3,9 @@
 
 #include "ADASManager/APA/AApaBase.h"
 
-
 using namespace std;
-using namespace Harman::Adas::AFramework::ABase::ADASManager;
+
+using Harman::Adas::AFramework::ABase::ADASManager::AApaBase;
 
 namespace Harman {
 namespace Adas {
@@ -26,15 +26,12 @@ public:
 	VOID  deactiveAPA(const string& pData);
 
 private:
-		
+
 };
 
 }
 }
 }
 }
-
-
-
 
 #endif

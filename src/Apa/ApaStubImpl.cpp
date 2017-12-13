@@ -9,7 +9,7 @@ namespace AProject {
 namespace GWMV2MH {
 
 ApaStubImpl::ApaStubImpl()
-    :AApaBase()
+    : AApaBase()
 {
 
 }
@@ -26,7 +26,7 @@ a_status  ApaStubImpl::initialize()
     //registerFunc((UInt32)eCameraActivate_ON, makeFunctor(this, &APAStubImpl::showCamera));
     registerFunc((UInt32)eAPA_ACTIVE, makeFunctor(this, &ApaStubImpl::activeAPA));
     registerFunc((UInt32)eAPA_DEACTIVE, makeFunctor(this, &ApaStubImpl::deactiveAPA));
-    return a_status(0); 
+    return a_status(0);
 }
 
 VOID  ApaStubImpl::afterHandleMessageQueue()
